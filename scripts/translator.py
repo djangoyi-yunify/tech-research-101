@@ -189,13 +189,32 @@ def merge_sections(sections: list[MarkdownSection]) -> str:
     Returns:
         合并后的 Markdown 内容
     """
+    if not sections:
+        return ""
+    
     result = []
-    for section in sections:
+    for i, section in enumerate(sections):
         if section.type == "code":
+            if result:
+                prev_content = result[-1]
+                if not prev_content.endswith('\n\n'):
+                    if prev_content.endswith('\n'):
+                        result[-1] = prev_content + '\n'
+                    else:
+                        result[-1] = prev_content + '\n\n'
+            
             lang = section.language or ""
-            result.append(f"```{lang}\n{section.content}\n```")
+            code_block = f"```{lang}\n{section.content}\n```"
+            result.append(code_block)
+            
+            if i < len(sections) - 1:
+                next_section = sections[i + 1]
+                if next_section.type == "text":
+                    if next_section.content and not next_section.content.startswith('\n'):
+                        result.append('\n\n')
         else:
             result.append(section.content)
+    
     return "".join(result)
 
 
