@@ -9,7 +9,7 @@ class TestGetFileSha:
         """测试成功获取 SHA"""
         mock_response = Mock()
         mock_response.status_code = 200
-        mock_response.json.return_value = [{"sha": "abc123"}]
+        mock_response.json.return_value = {"sha": "abc123"}
         mock_get.return_value = mock_response
         
         sha = get_file_sha("owner/repo", "main", "README.md", "token")
@@ -36,14 +36,14 @@ class TestGetFileSha:
             get_file_sha("owner/repo", "main", "README.md", "token")
 
     @patch('requests.get')
-    def test_get_file_sha_no_commits(self, mock_get):
-        """测试没有 commits"""
+    def test_get_file_sha_no_sha_field(self, mock_get):
+        """测试响应缺少 sha 字段"""
         mock_response = Mock()
         mock_response.status_code = 200
-        mock_response.json.return_value = []
+        mock_response.json.return_value = {}
         mock_get.return_value = mock_response
         
-        with pytest.raises(FileNotFoundError):
+        with pytest.raises(KeyError):
             get_file_sha("owner/repo", "main", "README.md", "token")
 
     @patch('requests.get')

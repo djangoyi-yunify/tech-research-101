@@ -10,7 +10,7 @@ class GitHubFile:
 
 
 def get_file_sha(repo: str, branch: str, path: str, token: str) -> str:
-    """获取文件最新 commit SHA
+    """获取文件 blob SHA
     
     Args:
         repo: 仓库名，格式 "owner/repo"
@@ -19,18 +19,14 @@ def get_file_sha(repo: str, branch: str, path: str, token: str) -> str:
         token: GitHub token
         
     Returns:
-        commit SHA
+        blob SHA
         
     Raises:
         FileNotFoundError: 文件不存在
         PermissionError: 无访问权限
     """
-    url = f"https://api.github.com/repos/{repo}/commits"
-    params = {
-        'path': path,
-        'sha': branch,
-        'per_page': 1
-    }
+    url = f"https://api.github.com/repos/{repo}/contents/{path}"
+    params = {'ref': branch}
     headers = {
         'Authorization': f'token {token}',
         'Accept': 'application/vnd.github.v3+json'
@@ -45,11 +41,8 @@ def get_file_sha(repo: str, branch: str, path: str, token: str) -> str:
     elif response.status_code != 200:
         raise Exception(f"GitHub API error: {response.status_code} - {response.text}")
     
-    commits = response.json()
-    if not commits:
-        raise FileNotFoundError(f"No commits found for file: {path}")
-    
-    return commits[0]['sha']
+    data = response.json()
+    return data['sha']
 
 
 def download_file(repo: str, branch: str, path: str, token: str) -> GitHubFile:
