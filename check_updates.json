@@ -1,1 +1,6 @@
-{"config_path": "test-config.json"}
+{
+  "config_paths": [
+    "demo.json",
+    "github-spec-kit-main.json"
+  ]
+}

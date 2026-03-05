@@ -6,11 +6,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-updates:
+  get-configs:
     runs-on: ubuntu-latest
     outputs:
-      files: ${{ steps.check.outputs.files }}
-      has_updates: ${{ steps.check.outputs.has_updates }}
+      config-paths: ${{ steps.get-configs.outputs.config_paths }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      
+      - name: Get config paths
+        id: get-configs
+        run: |
+          CONFIG_PATHS=$(python -c "
+          import json
+          with open('check_updates.json') as f:
+              data = json.load(f)
+          paths = data.get('config_paths', [])
+          print(json.dumps(paths))
+          ")
+          echo "config_paths=$CONFIG_PATHS" >> $GITHUB_OUTPUT
+
+  check-updates:
+    needs: get-configs
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config-path: ${{ fromJson(needs.get-configs.outputs.config-paths) }}
     
     steps:
       - name: Checkout repository
@@ -32,10 +56,8 @@ jobs:
         id: check
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          CONFIG_PATH: ${{ matrix.config-path }}
         run: |
-          CONFIG_PATH=$(python -c "import json; print(json.load(open('check_updates.json'))['config_path'])")
-          echo "config_path=$CONFIG_PATH" >> $GITHUB_OUTPUT
-          export CONFIG_PATH=$CONFIG_PATH
           python -c "
           from scripts.main import run_check_workflow
           run_check_workflow()
@@ -47,5 +69,5 @@ jobs:
         with:
           workflow: translate-docs.yml
           inputs: |
-            {"files": "${{ steps.check.outputs.files }}", "config_path": "${{ steps.check.outputs.config_path }}"}
+            {"files": "${{ steps.check.outputs.files }}", "config_path": "${{ matrix.config-path }}"}
           token: ${{ secrets.PAT_TOKEN }}

@@ -124,6 +124,9 @@ def run_check_workflow() -> None:
     from scripts.config import load_config
     config = load_config(config_path)
     
+    print(f"Checking updates for config: {config_path}")
+    print(f"Source repo: {config.source_repo}, branch: {config.source_branch}")
+    
     updates = check_updates(config, github_token)
     
     with open(os.environ['GITHUB_OUTPUT'], 'a') as f:
