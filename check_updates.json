@@ -1,6 +1,7 @@
 {
   "config_paths": [
     "demo.json",
-    "github-spec-kit-main.json"
+    "github-spec-kit-main.json",
+    "anthropics-skills-main.json"
   ]
 }

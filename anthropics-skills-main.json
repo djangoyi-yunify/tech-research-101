@@ -1,0 +1,22 @@
+{
+  "source_repo": "anthropics/skills",
+  "source_branch": "main",
+  "llm": {
+    "provider": "qingcloud",
+    "model": "GLM-5",
+    "base_url": "https://openapi.coreshub.cn/v1"
+  },
+  "groups": [
+    {
+      "name": "root",
+      "target_dir": "anthropics-skills",
+      "include_source": true,
+      "files": [
+        {
+          "source": "README.md",
+          "target": "README.cn.md"
+        }
+      ]
+    }
+  ]
+}
