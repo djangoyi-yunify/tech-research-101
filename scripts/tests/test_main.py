@@ -199,7 +199,7 @@ class TestTranslateFiles:
         mock_translate.return_value = "# 翻译后"
         
         config = Config(
-            source_repo="github/spec-kit",
+            source_repo="djangoyi-yunify/tech-research-101",
             source_branch="main",
             llm=LLMConfig(provider="qingcloud", model="glm-5"),
             groups=[
@@ -221,7 +221,7 @@ class TestTranslateFiles:
         mock_client = Mock()
         translate_files(config, updates, mock_client, "token")
         
-        mock_ensure.assert_called_with("github-spec-kit-main/00-constitution")
+        mock_ensure.assert_called_with("docs/translated/djangoyi-yunify-tech-research-101-main/00-constitution")
 
     @patch('scripts.main.download_file')
     @patch('scripts.main.translate_markdown')

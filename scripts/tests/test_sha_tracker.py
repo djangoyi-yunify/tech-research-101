@@ -9,13 +9,13 @@ from scripts.config import Config, LLMConfig, GroupConfig, FileConfig
 class TestShaTracker:
     def test_get_sha_path(self):
         config = Config(
-            source_repo="github/spec-kit",
+            source_repo="djangoyi-yunify/tech-research-101",
             source_branch="main",
             llm=LLMConfig(provider="qingcloud", model="glm-5"),
             groups=[]
         )
         path = get_sha_path(config)
-        assert path == "github-spec-kit-main/sha_tracker.ini"
+        assert path == "docs/translated/djangoyi-yunify-tech-research-101-main/sha_tracker.ini"
     
     def test_get_sha_path_with_slashes(self):
         config = Config(
@@ -25,7 +25,7 @@ class TestShaTracker:
             groups=[]
         )
         path = get_sha_path(config)
-        assert path == "owner-repo-develop/sha_tracker.ini"
+        assert path == "docs/translated/owner-repo-develop/sha_tracker.ini"
     
     def test_save_and_get_sha(self):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -108,7 +108,7 @@ class TestShaTracker:
             
             save_sha(config, "test/file.md", "abc123")
             
-            with open("owner-repo-main/sha_tracker.ini", "r") as f:
+            with open("docs/translated/owner-repo-main/sha_tracker.ini", "r") as f:
                 content = f.read()
             
             assert "[files]" in content

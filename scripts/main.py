@@ -73,7 +73,10 @@ def translate_files(
     results = {}
     shas = {}
     
-    prefix = f"{config.source_repo}-{config.source_branch}".replace("/", "-")
+    # 只替换 source_repo 和 source_branch 中的 /
+    repo_name = config.source_repo.replace("/", "-")
+    branch_name = config.source_branch.replace("/", "-")
+    prefix = f"docs/translated/{repo_name}-{branch_name}"
     total = len(updates)
     
     print(f"\n{'='*60}")

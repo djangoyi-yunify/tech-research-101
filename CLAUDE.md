@@ -23,8 +23,9 @@ tech-research-101/
 ├── demo.json                   # 示例翻译配置
 ├── check_updates.json          # 多配置文件路径列表
 ├── requirements.txt            # Python 依赖
-├── github-spec-kit-main/       # 克隆的 spec-kit 仓库（翻译源）
-└── anthropics-skills-main/     # Anthropic skills 示例
+└── docs/translated/            # 翻译输出目录
+    ├── github-spec-kit-main/       # github/spec-kit 翻译结果
+    └── anthropics-skills-main/     # anthropics/skills 翻译结果
 ```
 
 ## 核心功能
@@ -133,11 +134,8 @@ result = translate_markdown(client, "# Hello World\n\nThis is a test.")
 使用 `gh` 命令行工具手动触发强制翻译：
 
 ```bash
-# 翻译 demo.json 配置的文件
+# 翻译 demo.json 配置的文件（测试用）
 gh workflow run force-translate.yml -f config_path=demo.json
-
-# 翻译 anthropics-skills-main.json 配置的文件
-gh workflow run force-translate.yml -f config_path=anthropics-skills-main.json
 
 # 查看工作流运行状态
 gh run list --workflow=force-translate.yml --limit 3

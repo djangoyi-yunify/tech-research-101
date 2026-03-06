@@ -4,7 +4,10 @@ from scripts.config import Config
 
 
 def get_sha_path(config: Config) -> str:
-    prefix = f"{config.source_repo}-{config.source_branch}".replace("/", "-")
+    # 只替换 source_repo 和 source_branch 中的 /
+    repo_name = config.source_repo.replace("/", "-")
+    branch_name = config.source_branch.replace("/", "-")
+    prefix = f"docs/translated/{repo_name}-{branch_name}"
     return os.path.join(prefix, "sha_tracker.ini")
 
 
