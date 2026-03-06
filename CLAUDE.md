@@ -8,7 +8,8 @@
 tech-research-101/
 ├── .github/workflows/          # GitHub Actions 工作流
 │   ├── check-updates.yml      # 每日检测文件更新
-│   └── translate-docs.yml      # 翻译工作流
+│   ├── translate-docs.yml      # 翻译工作流
+│   └── force-translate.yml     # 手动强制翻译工作流
 ├── scripts/                    # 核心 Python 模块
 │   ├── main.py                # 工作流入口函数
 │   ├── config.py              # 配置管理
@@ -28,16 +29,30 @@ tech-research-101/
 
 ## 核心功能
 
-### 1. 双工作流设计
+### 1. 三工作流设计
 
 - **check-updates.yml**: 每日定时检测源仓库文件 SHA 变化，触发翻译
 - **translate-docs.yml**: 下载文件 → 分离代码块 → 翻译文本 → 保存结果
+- **force-translate.yml**: 手动强制翻译指定配置文件中的所有源文件（忽略 SHA 检查）
 
 ### 2. 增量更新
 
 通过 SHA 追踪机制（`sha_tracker.ini`），只翻译发生变化的文件，避免重复翻译。
 
-### 3. 多 LLM 提供商支持
+### 3. Git 冲突处理策略
+
+工作流采用以下策略处理并发推送冲突：
+
+```
+翻译前: git pull --rebase origin main  # 获取最新代码，减少冲突
+翻译...
+git commit
+git fetch origin
+git rebase origin/main                  # 将本地提交变基到远程最新之上
+git push origin main
+```
+
+### 4. 多 LLM 提供商支持
 
 - QingCloud (青云AI) ✅
 - OpenAI ✅
@@ -112,3 +127,20 @@ result = translate_markdown(client, "# Hello World\n\nThis is a test.")
 - `QINGCLOUD_API_KEY`: 青云 AI API Key
 - `OPENAI_API_KEY`: OpenAI API Key
 - `ANTHROPIC_API_KEY`: Anthropic API Key
+
+## 手动触发翻译
+
+使用 `gh` 命令行工具手动触发强制翻译：
+
+```bash
+# 翻译 demo.json 配置的文件
+gh workflow run force-translate.yml -f config_path=demo.json
+
+# 翻译 anthropics-skills-main.json 配置的文件
+gh workflow run force-translate.yml -f config_path=anthropics-skills-main.json
+
+# 查看工作流运行状态
+gh run list --workflow=force-translate.yml --limit 3
+```
+
+或在 GitHub 仓库页面：Actions → Force Translate → Run workflow → 输入配置文件路径
