@@ -1,0 +1,92 @@
+name: Force Translate
+
+on:
+  workflow_dispatch:
+    inputs:
+      config_path:
+        description: 'Path to translation config file (e.g., demo.json)'
+        required: true
+        type: string
+
+jobs:
+  force-translate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Force translate all files
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          LLM_API_KEY: ${{ secrets.QINGCLOUD_API_KEY }}
+          CONFIG_PATH: ${{ inputs.config_path }}
+          PYTHONUNBUFFERED: 1
+        run: |
+          python -c "
+          import os
+          from scripts.config import load_config, get_files_to_translate
+          from scripts.main import translate_files, FileUpdate
+          from scripts.translator import get_llm_client
+
+          config_path = os.environ.get('CONFIG_PATH')
+          github_token = os.environ.get('GITHUB_TOKEN')
+          llm_api_key = os.environ.get('LLM_API_KEY')
+
+          config = load_config(config_path)
+          llm_client = get_llm_client(
+              provider=config.llm.provider,
+              model=config.llm.model,
+              base_url=config.llm.base_url,
+              api_key=llm_api_key
+          )
+
+          # Get all files from config (force translate, ignore SHA)
+          files = get_files_to_translate(config)
+          updates = [
+              FileUpdate(group_idx=group_idx, file_idx=file_idx, file_config=file_config)
+              for group_idx, file_idx, file_config in files
+          ]
+
+          if updates:
+              print(f'Force translating {len(updates)} files from {config_path}')
+              results, shas = translate_files(config, updates, llm_client, github_token)
+
+              # Save SHAs after successful translation
+              from scripts.sha_tracker import save_sha
+              for source, sha in shas.items():
+                  if results.get(source, False):
+                      save_sha(config, source, sha)
+
+              print(f'Translation completed. Results: {results}')
+          else:
+              print('No files found in config')
+          "
+
+      - name: Commit and push changes
+        run: |
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: force update translated documentation from ${{ inputs.config_path }}"
+            git pull --rebase origin main
+            git push origin main
+          fi
