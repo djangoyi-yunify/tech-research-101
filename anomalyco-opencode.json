@@ -1,0 +1,66 @@
+{
+  "source_repo": "anomalyco/opencode",
+  "source_branch": "main",
+  "llm": {
+    "provider": "qingcloud",
+    "model": "MiniMax-M2.5",
+    "base_url": "https://openapi.coreshub.cn/v1"
+  },
+  "groups": [
+    {
+      "name": "session-prompts",
+      "target_dir": "session-prompts",
+      "include_source": true,
+      "files": [
+        {
+          "source": "packages/opencode/src/session/prompt/anthropic.txt",
+          "target": "anthropic.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/beast.txt",
+          "target": "beast.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/build-switch.txt",
+          "target": "build-switch.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/codex.txt",
+          "target": "codex.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/copilot-gpt-5.txt",
+          "target": "copilot-gpt-5.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/default.txt",
+          "target": "default.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/gemini.txt",
+          "target": "gemini.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/gpt.txt",
+          "target": "gpt.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/max-steps.txt",
+          "target": "max-steps.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/plan-reminder-anthropic.txt",
+          "target": "plan-reminder-anthropic.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/plan.txt",
+          "target": "plan.cn.txt"
+        },
+        {
+          "source": "packages/opencode/src/session/prompt/trinity.txt",
+          "target": "trinity.cn.txt"
+        }
+      ]
+    }
+  ]
+}
