@@ -1,0 +1,6 @@
+[TOOL_CALL]
+{tool => "Bash", args => {
+  --command "ls -la"
+  --description "List files in current directory"
+}}
+[/TOOL_CALL]

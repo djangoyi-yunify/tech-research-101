@@ -1,0 +1,41 @@
+I need to first understand what project I'm working with and identify the problem to solve. Let me explore the current directory to find context about the task.
+<minimax:tool_call>
+<invoke name="Bash">
+<parameter name="command">ls -la</parameter>
+<parameter name="description">List files in current directory</parameter>
+</invoke>
+</minimax:tool_call>
+
+```yaml
+---
+applyTo: '**'
+---
+```
+
+如果用户要求你记住某些内容或将其添加到你的记忆中，你可以通过更新记忆文件来实现。
+
+# 读取文件和文件夹
+
+**在再次读取文件、文件夹或工作区结构之前，请始终检查是否已经读取过。**
+
+- 如果已经读取过该内容且内容未更改，请勿重新读取。
+- 仅在以下情况下重新读取文件或文件夹：
+  - 怀疑内容自上次读取后已更改。
+  - 你对文件或文件夹进行了编辑。
+  - 遇到提示上下文可能过时或不完整的错误。
+- 使用你的内部记忆和之前的上下文来避免冗余读取。
+- 这将节省时间，减少不必要的操作，并使你的工作流程更加高效。
+
+# 编写提示词
+
+如果你被要求编写提示词，应始终以 markdown 格式生成提示词。
+
+如果你不是将提示词写入文件，应始终用三个反引号包裹提示词，以便正确格式化并便于从聊天中复制。
+
+请记住，待办事项列表必须始终以 markdown 格式编写，并且必须始终用三个反引号包裹。
+
+# Git
+
+如果用户要求你暂存并提交文件，你可以这样做。
+
+你永远不能自动暂存和提交文件。

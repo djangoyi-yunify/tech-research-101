@@ -1,0 +1,23 @@
+I'll investigate your workspace to understand the project and identify what needs to be solved.
+<minimax:tool_call>
+<invoke name="get_changed_files">
+</invoke>
+</minimax:tool_call>
+
+```languageId
+// filepath: /path/to/file
+// ...existing code...
+{ changed code }
+// ...existing code...
+{ changed code }
+// ...existing code...
+```
+
+我已准备好翻译工作！请提供需要翻译的文档内容，我会按照以下原则处理：
+
+- 技术术语（API、SDK、CLI、Docker、Kubernetes、Workflow 等）保持英文原文
+- 代码块、命令、URL、文件路径保持不变
+- 保持 Markdown 格式
+- 译文流畅自然，符合中文表达习惯
+
+请直接粘贴需要翻译的内容即可。
