@@ -1,6 +1,6 @@
 {
   "source_repo": "anomalyco/opencode",
-  "source_branch": "main",
+  "source_branch": "dev",
   "llm": {
     "provider": "qingcloud",
     "model": "MiniMax-M2.5",
