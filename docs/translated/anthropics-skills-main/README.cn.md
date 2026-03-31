@@ -1,30 +1,31 @@
-> **注意：** 此仓库包含 Anthropic 为 Claude 开发的技能实现。关于 Agent Skills 标准，请参阅 [agentskills.io](http://agentskills.io)。
+> **注意：** 此仓库包含 Anthropic 为 Claude 实现的技能。关于 Agent Skills 标准，请参阅 [agentskills.io](http://agentskills.io)。
 
 # 技能
 
-技能是指令、脚本和资源的文件夹，Claude 会动态加载这些内容以提升在特定任务上的表现。技能教会 Claude 如何以可重复的方式完成具体任务，无论是在遵循公司品牌指南的情况下创建文档、使用组织特定的 工作流分析数据，还是实现个人任务自动化。
+技能是由指令、脚本和资源组成的文件夹，Claude 会动态加载这些内容以提升在特定任务上的表现。技能教会 Claude 如何以可重复的方式完成特定任务，无论这是根据公司品牌指南创建文档、使用组织特定的工作流程分析数据，还是自动化个人任务。
 
-更多信息，请查看：
+如需了解更多信息，请查看：
+
 - [什么是技能？](https://support.claude.com/en/articles/12512176-what-are-skills)
 - [在 Claude 中使用技能](https://support.claude.com/en/articles/12512180-using-skills-in-claude)
 - [如何创建自定义技能](https://support.claude.com/en/articles/12512198-creating-custom-skills)
-- [使用 Agent Skills 为现实世界的智能体赋能](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
+- [使用 Agent Skills 为真实世界配备智能体](https://anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills)
 
 # 关于此仓库
 
-此仓库包含展示 Claude 技能系统可能性的技能示例。这些技能涵盖创意应用（艺术、音乐、设计）到技术任务（测试 Web 应用、MCP 服务器生成）再到企业工作流（通信、品牌等）。
+此仓库包含展示 Claude 技能系统可能性的技能。这些技能涵盖创意应用（艺术、音乐、设计）到技术任务（测试 Web 应用、MCP 服务器生成）再到企业工作流程（通信、品牌等）。
 
-每个技能都独立存放在自己的文件夹中，包含 `SKILL.md` 文件，其中包含 Claude 使用的指令和元数据。您可以浏览这些技能以获取创建自己技能的灵感，或了解不同的模式和实现方法。
+每个技能都独立存在于自己的文件夹中，包含一个 `SKILL.md` 文件，其中包含 Claude 使用的指令和元数据。您可以浏览这些技能以获取创建自己技能的灵感，或了解不同的模式和 approaches。
 
-此仓库中的许多技能都是开源的（Apache 2.0）。我们还包含了为 [Claude 的文档功能](https://www.anthropic.com/news/create-files) 提供支持的文档创建和编辑技能，存放在 [`skills/docx`](./skills/docx)、[`skills/pdf`](./skills/pdf)、[`skills/pptx`](./skills/pptx) 和 [`skills/xlsx`](./skills/xlsx) 子文件夹中。这些是源代码可用而非开源的，但我们希望与开发者分享这些作为复杂技能的参考，这些技能在生产级 AI 应用中被积极使用。
+此仓库中的许多技能都是开源的（Apache 2.0）。我们还包含了为 [Claude 的文档功能](https://www.anthropic.com/news/create-files)提供支持的文档创建和编辑技能，位于 [`skills/docx`](./skills/docx)、[`skills/pdf`](./skills/pdf)、[`skills/pptx`](./skills/pptx) 和 [`skills/xlsx`](./skills/xlsx) 子文件夹中。这些是源码可用而非开源的，但我们希望与开发者分享这些作为在生产级 AI 应用中实际使用的更复杂技能的参考。
 
 ## 免责声明
 
-**这些技能仅供演示和教育目的之用。** 虽然 Claude 可能会提供其中某些功能，但您从 Claude 获得的实现和行为可能与此仓库中展示的技能有所不同。这些技能旨在说明模式和可能性。在将这些技能用于关键任务之前，请务必在您自己的环境中进行充分测试。
+**这些技能仅供演示和教育目的。** 虽然 Claude 可能会提供其中部分功能，但您从 Claude 获得的实现和行为可能与此仓库中展示的技能有所不同。这些技能旨在说明模式和可能性。在依赖这些技能完成关键任务之前，请务必在您自己的环境中进行充分测试。
 
 # 技能集
 
-- [./skills](./skills)：创意与设计、开发与技术、企业与通信以及文档技能的技能示例
+- [./skills](./skills)：创意与设计、开发与技术、企业与通信以及文档技能的示例
 - [./spec](./spec)：Agent Skills 规范
 - [./template](./template)：技能模板
 
@@ -32,20 +33,19 @@
 
 ## Claude Code
 
-您可以通过在 Claude Code 中运行以下命令将此仓库注册为 Claude Code 插件市场：
+您可以通过在 Claude Code 中运行以下命令将此仓库注册为 Claude Code 插件 marketplace：
 
 ```
 /plugin marketplace add anthropics/skills
 ```
 
-然后，安装特定技能集：
-
+然后，安装特定的技能集：
 1. 选择 `Browse and install plugins`
 2. 选择 `anthropic-agent-skills`
 3. 选择 `document-skills` 或 `example-skills`
 4. 选择 `Install now`
 
-或者，直接通过以下方式安装任一 Plugin：
+或者，直接安装任一插件：
 
 ```
 /plugin install document-skills@anthropic-agent-skills
@@ -62,11 +62,11 @@
 
 ## Claude API
 
-你可以通过 Claude API 使用 Anthropic 预置的技能并上传自定义技能。更多详情请参阅 [技能 API 快速入门](https://docs.claude.com/en/api/skills-guide#creating-a-skill)。
+你可以通过 Claude API 使用 Anthropic 预置的技能并上传自定义技能。详见 [Skills API 快速入门](https://docs.claude.com/en/api/skills-guide#creating-a-skill)。
 
 # 创建基础技能
 
-技能创建非常简单——只需一个包含 YAML 头部和说明的 `SKILL.md` 文件夹即可。你可以使用本仓库中的 **template-skill** 作为起点：
+技能的创建非常简单——只需一个包含 `SKILL.md` 文件的文件夹，其中包含 YAML 前置信息和指令。你可以使用本仓库中的 **template-skill** 作为起点：
 
 ```markdown
 ---
@@ -87,17 +87,17 @@ description: A clear description of what this skill does and when to use it
 - Guideline 2
 ```
 
-# 前置元数据
+# 前言
 
-前置元数据只需要两个字段：
+前言部分只需要两个字段：
 
-- `name` - 技能的唯一标识符（小写，用连字符代替空格）
-- `description` - 技能的完整描述，说明技能的功能和使用场景
+- `name` - 你的技能的唯一标识符（小写，空格用连字符）
+- `description` - 完整描述该技能的用途及使用场景
 
-下方的 Markdown 内容包含 Claude 将遵循的说明、示例和指南。更多详情请参阅[如何创建自定义技能](https://support.claude.com/en/articles/12512198-creating-custom-skills)。
+下方的 Markdown 内容包含 Claude 将遵循的说明、示例和指南。详情请参阅[如何创建自定义技能](https://support.claude.com/en/articles/12512198-creating-custom-skills)。
 
 # 合作伙伴技能
 
-技能是教 Claude 更好地掌握特定软件使用的好方法。当我们发现合作伙伴提供的优秀示例技能时，可能会在此突出展示其中一些：
+技能是教 Claude 更好地使用特定软件的好方法。当我们看到合作伙伴提供的优秀示例技能时，可能会在此处突出展示其中一些：
 
 - **Notion** - [Notion Skills for Claude](https://www.notion.so/notiondevs/Notion-Skills-for-Claude-28da4445d27180c7af1df7d8615723d0)
