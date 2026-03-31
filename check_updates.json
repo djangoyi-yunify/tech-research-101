@@ -2,6 +2,7 @@
   "config_paths": [
     "demo.json",
     "github-spec-kit-main.json",
-    "anthropics-skills-main.json"
+    "anthropics-skills-main.json",
+    "anomalyco-opencode.json"
   ]
 }
