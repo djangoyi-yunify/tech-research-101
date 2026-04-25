@@ -1,55 +1,55 @@
-# 实施计划：[FEATURE]
+# 实施计划：[功能]
 
-**分支**：`[###-feature-name]` | **日期**：[DATE] | **规范**：[link]
-**输入**：来自 `/specs/[###-feature-name]/spec.md` 的功能规范
+**分支**：`[###-feature-name]` | **日期**：[DATE] | **规格**：[link]
+**输入**：`/specs/[###-feature-name]/spec.md` 中的功能规格
 
-**注意**：此模板由 `/speckit.plan` 命令填充。有关执行工作流，请参阅 `.specify/templates/plan-template.md`。
+**注意**：此模板由 `__SPECKIT_COMMAND_PLAN__` 命令填充。详见 `.specify/templates/plan-template.md` 中的执行工作流程。
 
-## 概述
+## 摘要
 
-[从功能规范中提取：主要需求 + 来自研究的技术方法]
+[从功能规格中提取：主要需求 + 研究中的技术方案]
 
-## 技术背景
+## 技术上下文
 
 <!--
-  需要采取的行动：将本节内容替换为项目的技术细节。
-  此处的结构仅供参考，用于指导迭代过程。
+  需要操作：替换本节内容为项目的技术细节。
+  这里的结构仅作为指导，以引导迭代过程。
 -->
 
-**语言/版本**：[例如，Python 3.11, Swift 5.9, Rust 1.75 或 需要澄清]  
-**主要依赖**：[例如，FastAPI, UIKit, LLVM 或 需要澄清]  
-**存储**：[如适用，例如，PostgreSQL, CoreData, files 或 N/A]  
-**测试**：[例如，pytest, XCTest, cargo test 或 需要澄清]  
-**目标平台**：[例如，Linux server, iOS 15+, WASM 或 需要澄清]
-**项目类型**：[例如，library/cli/web-service/mobile-app/compiler/desktop-app 或 需要澄清]  
-**性能目标**：[领域特定，例如，1000 req/s, 10k lines/sec, 60 fps 或 需要澄清]  
-**约束条件**：[领域特定，例如，<200ms p95, <100MB memory, offline-capable 或 需要澄清]  
-**规模/范围**：[领域特定，例如，10k users, 1M LOC, 50 screens 或 需要澄清]
+**语言/版本**：[例如，Python 3.11、Swift 5.9、Rust 1.75 或需要澄清]
+**主要依赖**：[例如，FastAPI、UIKit、LLVM 或需要澄清]
+**存储**：[如果适用，例如 PostgreSQL、CoreData、文件或 不适用]
+**测试**：[例如，pytest、XCTest、cargo test 或需要澄清]
+**目标平台**：[例如，Linux 服务器、iOS 15+、WASM 或需要澄清]
+**项目类型**：[例如，库/CLI/Web 服务/移动应用/编译器/桌面应用 或需要澄清]
+**性能目标**：[领域特定，例如 1000 req/s、10k lines/sec、60 fps 或需要澄清]
+**约束条件**：[领域特定，例如 <200ms p95、<100MB 内存、离线可用 或需要澄清]
+**规模/范围**：[领域特定，例如 10k 用户、1M LOC、50 个界面 或需要澄清]
 
-## 章程检查
+## 宪法检查
 
-*关卡：必须在第 0 阶段研究前通过。在第 1 阶段设计后重新检查。*
+*闸门：必须在阶段 0 研究之前通过。阶段 1 设计后重新检查。*
 
-[根据章程文件确定的关卡]
+[根据宪法文件确定闸门]
 
 ## 项目结构
 
-### 文档（此功能）
+### 文档（本功能）
 
 ```text
 specs/[###-feature]/
-├── plan.md              # This file (/speckit.plan command output)
-├── research.md          # Phase 0 output (/speckit.plan command)
-├── data-model.md        # Phase 1 output (/speckit.plan command)
-├── quickstart.md        # Phase 1 output (/speckit.plan command)
-├── contracts/           # Phase 1 output (/speckit.plan command)
-└── tasks.md             # Phase 2 output (/speckit.tasks command - NOT created by /speckit.plan)
+├── plan.md              # This file (__SPECKIT_COMMAND_PLAN__ command output)
+├── research.md          # Phase 0 output (__SPECKIT_COMMAND_PLAN__ command)
+├── data-model.md        # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
+├── quickstart.md        # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
+├── contracts/           # Phase 1 output (__SPECKIT_COMMAND_PLAN__ command)
+└── tasks.md             # Phase 2 output (__SPECKIT_COMMAND_TASKS__ command - NOT created by __SPECKIT_COMMAND_PLAN__)
 ```
 
 ### 源代码（仓库根目录）
+
 <!--
-  需采取的操作：使用此功能的具体布局替换下方的占位符树。删除未使用的选项，并使用实际路径（例如 apps/admin, packages/something）展开所选结构。交付的计划中不得包含选项标签。
--->
+  行动要求：用此功能的具体布局替换下方的占位符树状结构。删除未使用的选项，并用真实路径（如 apps/admin、packages/something）扩展选中的结构。交付的计划不得包含选项标签。 -->
 
 ```text
 # [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
@@ -87,13 +87,13 @@ ios/ or android/
 └── [platform-specific structure: feature modules, UI flows, platform tests]
 ```
 
-**结构决策**：[记录所选结构并引用上方捕获的真实目录]
+**结构决策**：[记录所选结构并引用上文捕获的真实目录]
 
-## 复杂度追踪
+## 复杂度跟踪
 
-> **仅在 Constitution Check 中存在需要论证的违规时填写**
+> **仅在 Constitution Check 有违规且需要正当理由时填写**
 
-| 违规项 | 为何需要 | 拒绝更简单替代方案的原因 |
-|-----------|------------|-------------------------------------|
-| [例如：第4个项目] | [当前需求] | [为何3个项目不足] |
-| [例如：Repository pattern] | [具体问题] | [为何直接 DB 访问不足] |
+| 违规 | 为何需要 | 更简单替代方案被驳回原因 |
+|------|----------|--------------------------|
+| [例如，第4个项目] | [当前需求] | [为何3个项目不足] |
+| [例如，仓储模式] | [具体问题] | [为何直接数据库访问不足] |
